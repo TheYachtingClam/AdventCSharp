@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Day13_Knights
 {
-    public class GuestNode
+    public class GuestData
     {
-        public GuestNode Right { get; set; }
+        public string Name { get; set; }
 
-        public int TotalValue { get; set; }
+        public Dictionary<string, int> happiness { get; set; }
     }
 }
