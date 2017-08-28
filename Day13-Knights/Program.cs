@@ -14,7 +14,7 @@ namespace Day13_Knights
 
         static void Main(string[] args)
         {
-            var data = LoadData("input.txt");
+            var data = AddMyself(LoadData("input.txt"));
 
             var bestCase = new List<string>();
 
@@ -35,7 +35,7 @@ namespace Day13_Knights
                     highestArrangement = opt;
                 }
             }
-            Console.WriteLine("Best Arrangement is \" {0} with a value of {1}", string.Join(",", highestArrangement), highestValue);
+            Console.WriteLine("Best Arrangement is {0} with a value of {1}", string.Join(",", highestArrangement), highestValue);
             Console.ReadKey();
         }
 
@@ -92,6 +92,21 @@ namespace Day13_Knights
                    data.Single(n => n.Name == n2).happiness[n1];
         }
 
+        private static List<GuestData> AddMyself(List<GuestData> data)
+        {
+            var guests = new List<GuestData>(data);
+
+            var newGuest = new GuestData { Name = "me", happiness = new Dictionary<string, int>() };
+            foreach(var guest in guests)
+            {
+                guest.happiness["me"] = 0;
+                newGuest.happiness[guest.Name] = 0;
+            }
+            guests.Add(newGuest);
+
+            return guests;
+        }
+
         private static List<GuestData> LoadData(string path)
         {
             var guests = new List<GuestData>();
@@ -127,6 +142,7 @@ namespace Day13_Knights
                     }
                 }
             }
+
             return guests;
         }
     }
