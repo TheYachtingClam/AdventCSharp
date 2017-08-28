@@ -14,7 +14,7 @@ namespace Day13_Knights
 
         static void Main(string[] args)
         {
-            var data = LoadData("test.txt");
+            var data = LoadData("input.txt");
 
             var bestCase = new List<string>();
 
@@ -59,7 +59,7 @@ namespace Day13_Knights
 
                 foreach (var option in opt)
                 {
-                    var lis = new List<string> { smallerData[0].Name };
+                    var lis = new List<string> { data[i].Name };
                     lis.AddRange(option);
                     returnList.Add(lis);
                 }
