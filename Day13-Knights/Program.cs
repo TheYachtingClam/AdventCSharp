@@ -18,15 +18,78 @@ namespace Day13_Knights
 
             var bestCase = new List<string>();
 
-            AddNode(data[0], new List<GuestNode>());
+            var node = new GuestNode();
+            node.Name = data[0].Name;
+
+            var options = CreateOptions(data);
+
+            var highestArrangement = new List<string>();
+            int highestValue = 0;
+
+            foreach(var opt in options)
+            {
+                var bob = ArrangementCost(opt, data);
+                if(bob > highestValue)
+                {
+                    highestValue = bob;
+                    highestArrangement = opt;
+                }
+            }
+            Console.WriteLine("Best Arrangement is \" {0} with a value of {1}", string.Join(",", highestArrangement), highestValue);
+            Console.ReadKey();
         }
 
-        static void AddNode(GuestData data, List<GuestNode> currentPath)
+        private static List<List<string>> CreateOptions(List<GuestData> data)
         {
-            foreach(var neighbor in data.happiness)
+            var returnList = new List<List<string>>();
+
+            if(data.Count == 2)
             {
-                
+                returnList.Add(new List<string> { data[0].Name, data[1].Name });
+                returnList.Add(new List<string> { data[1].Name, data[0].Name });
+                return returnList;
             }
+
+            for(int i = 0;i < data.Count();++i)
+            {
+                var smallerData = new List<GuestData>(data);
+                smallerData.Remove(smallerData[i]);
+
+                var opt = CreateOptions(smallerData);
+
+                foreach (var option in opt)
+                {
+                    var lis = new List<string> { smallerData[0].Name };
+                    lis.AddRange(option);
+                    returnList.Add(lis);
+                }
+            }
+
+            return returnList;
+        }
+
+        private static int ArrangementCost(List<string> arrangement, List<GuestData> data)
+        {
+            int totalCost = 0;
+
+            for(int i = 0;i < arrangement.Count();++i)
+            {
+                if(i == 0)
+                {
+                    totalCost += NeighborCost(arrangement[0], arrangement[arrangement.Count() - 1], data);
+                }
+                else
+                {
+                    totalCost += NeighborCost(arrangement[i], arrangement[i - 1], data);
+                }
+            }
+            return totalCost;
+        }
+
+        private static int NeighborCost(string n1, string n2, List<GuestData> data)
+        {
+            return data.Single(n => n.Name == n1).happiness[n2] + 
+                   data.Single(n => n.Name == n2).happiness[n1];
         }
 
         private static List<GuestData> LoadData(string path)

@@ -8,6 +8,8 @@ namespace Day13_Knights
 {
     public class GuestNode
     {
+        public string Name { get; set; }
+
         public GuestNode Right { get; set; }
 
         public int TotalValue { get; set; }
