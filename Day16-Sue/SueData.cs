@@ -28,54 +28,68 @@ namespace Day16_Sue
 
         public int perfumes { get; set; }
 
+        public SueData()
+        {
+            children = -1;
+            cats = -1;
+            samoyeds = -1;
+            pomeranians = -1;
+            akitas = -1;
+            vizslas = -1;
+            goldfish = -1;
+            trees = -1;
+            cars = -1;
+            perfumes = -1;
+        }
+
         public bool compare (SueData comp)
         {
-            if(comp.children != 0 && comp.children != children)
+            if(comp.children != -1 && comp.children != children)
             {
                 return false;
             }
             
-            if (comp.cats != 0 && comp.cats != cats)
+            if (comp.cats != -1 && comp.cats <= cats)
             {
                 return false;
             }
 
-            if (comp.samoyeds != 0 && comp.samoyeds != samoyeds)
+            if (comp.samoyeds != -1 && comp.samoyeds != samoyeds)
             {
                 return false;
             }
 
-            if (comp.pomeranians != 0 && comp.pomeranians != pomeranians)
+            if (comp.pomeranians != -1 && comp.pomeranians <= pomeranians)
             {
                 return false;
             }
 
-            if (comp.akitas != 0 && comp.akitas != akitas)
+            if (comp.akitas != -1 && comp.akitas != akitas)
             {
                 return false;
             }
 
-            if (comp.vizslas != 0 && comp.vizslas != vizslas)
+            if (comp.vizslas != -1 && comp.vizslas != vizslas)
             {
                 return false;
             }
 
-            if (comp.goldfish != 0 && comp.goldfish != goldfish)
+            if (comp.goldfish != -1 && comp.goldfish >= goldfish)
             {
                 return false;
             }
 
-            if (comp.trees != 0 && comp.trees != trees)
+            if (comp.trees != -1 && comp.trees <= trees)
             {
                 return false;
             }
 
-            if (comp.cars != 0 && comp.cars != cars)
+            if (comp.cars != -1 && comp.cars != cars)
             {
                 return false;
             }
 
-            if (comp.perfumes != 0 && comp.perfumes != perfumes)
+            if (comp.perfumes != -1 && comp.perfumes != perfumes)
             {
                 return false;
             }
