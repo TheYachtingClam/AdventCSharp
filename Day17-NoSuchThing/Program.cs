@@ -16,9 +16,26 @@ namespace Day17_NoSuchThing
 
             var solution = fillCups(containers, 150);
 
+            var quality = new Dictionary<int, int>();
+            foreach(var sol in solution)
+            {
+                if(!quality.ContainsKey(sol.Count))
+                {
+                    quality[sol.Count] = 1;
+                }
+                else
+                {
+                    quality[sol.Count]++;
+                }
+            }
+
+
+
             Console.WriteLine("number of solutions: " + solution.Count());
             Console.ReadKey();
         }
+        
+
 
         private static List<List<int>> fillCups(List<int> cups, int volume)
         {
