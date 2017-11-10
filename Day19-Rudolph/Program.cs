@@ -12,34 +12,40 @@ namespace Day19_Rudolph
     {
         static void Main(string[] args)
         {
-            var rData = LoadData("input.txt");
+            var rData = LoadData("test.txt");
 
+            var newMolecules = Replace(rData.originalString, rData.replacements);
+
+            foreach(var bob in newMolecules)
+            {
+                Console.WriteLine($"{bob}");
+            }
+            Console.WriteLine($"Count is {newMolecules.Count}");
+            Console.ReadKey();
+        }
+
+        private static List<string> Replace(string originalString, List<Tuple<string, string>> replacements)
+        {
             var newMolecules = new Dictionary<string, int>();
-            foreach(var replacement in rData.replacements)
+            foreach (var replacement in replacements)
             {
                 int subStringIndex;
                 int startIndex = 0;
                 do
                 {
-                    subStringIndex = rData.originalString.IndexOf(replacement.Item1, startIndex);
-                    if(subStringIndex >= 0)
+                    subStringIndex = originalString.IndexOf(replacement.Item1, startIndex);
+                    if (subStringIndex >= 0)
                     {
-                        var newString = rData.originalString;
+                        var newString = originalString;
                         newString = newString.Remove(subStringIndex, replacement.Item1.Count());
                         newString = newString.Insert(subStringIndex, replacement.Item2);
                         newMolecules[newString] = 0;
                         startIndex = subStringIndex + 1;
                     }
                 }
-                while (subStringIndex >= 0);   
+                while (subStringIndex >= 0);
             }
-
-            foreach(var bob in newMolecules)
-            {
-                Console.WriteLine($"{bob.Key}");
-            }
-            Console.WriteLine($"Count is {newMolecules.Count}");
-            Console.ReadKey();
+            return newMolecules.Select(s => s.Key).ToList();
         }
 
         private static RudolphData LoadData(string path)
