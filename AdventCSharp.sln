@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13-Knights", "Day13-Knights\Day13-Knights.csproj", "{558DA858-ED0F-47B1-A7C5-E9C93A97D156}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day8-Registers", "Day8-Registers\Day8-Registers.csproj", "{95DF087F-9228-40B2-9BA6-33DAABD4A1E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day9-StreamProcessing", "Day9-StreamProcessing\Day9-StreamProcessing.csproj", "{251E084E-15ED-4493-9BB8-1F28059D4704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day10-KnotHash", "Day10-KnotHash\Day10-KnotHash.csproj", "{CA72E279-0815-4265-9A65-860C47A32133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{251E084E-15ED-4493-9BB8-1F28059D4704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{251E084E-15ED-4493-9BB8-1F28059D4704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{251E084E-15ED-4493-9BB8-1F28059D4704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA72E279-0815-4265-9A65-860C47A32133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA72E279-0815-4265-9A65-860C47A32133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA72E279-0815-4265-9A65-860C47A32133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA72E279-0815-4265-9A65-860C47A32133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,5 +136,6 @@ Global
 		{CC223B8A-3BD3-4C69-9C24-D9345D6FF327} = {9D1B5B45-8805-42FD-8AD9-A4D2039D9E8E}
 		{95DF087F-9228-40B2-9BA6-33DAABD4A1E5} = {9D1B5B45-8805-42FD-8AD9-A4D2039D9E8E}
 		{251E084E-15ED-4493-9BB8-1F28059D4704} = {9D1B5B45-8805-42FD-8AD9-A4D2039D9E8E}
+		{CA72E279-0815-4265-9A65-860C47A32133} = {9D1B5B45-8805-42FD-8AD9-A4D2039D9E8E}
 	EndGlobalSection
 EndGlobal
