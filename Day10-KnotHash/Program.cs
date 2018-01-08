@@ -12,28 +12,74 @@ namespace Day10_KnotHash
         {
             var test = new List<int> { 3, 4, 1, 5 };
             var input = new List<int> { 230, 1, 2, 221, 97, 252, 168, 169, 57, 99, 0, 254, 181, 255, 235, 167 };
-            var myList = new List<int>();
-            var skipSize = 0;
-            var currentIndex = 0;
+            var inp = "230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167";
+            var frank = ReadInput(inp);
 
-            for(int i = 0;i < 256;++i)
+            var bob = TransformList(frank);
+
+            var sally = CreateDenseHash(bob);
+
+            Console.WriteLine($"output = {string.Join("", sally.Select(s => s.ToString("X2")))}");
+
+            Console.ReadKey();
+        }
+
+        static List<int> CreateDenseHash(List<int> input)
+        {
+            if(input.Count != 256)
+            {
+                throw new ApplicationException("CreateDenseHash can only take input lengths of 256");
+            }
+
+            var denseHash = new List<int>();
+            for(int i = 0;i < 16;++i)
+            {
+                int denseItem = input[i * 16];
+                for(int j = 1;j < 16;++j)
+                {
+                    denseItem ^= input[i * 16 + j];
+                }
+                denseHash.Add(denseItem);
+            }
+            return denseHash;
+        }
+
+        static List<int> ReadInput(string input)
+        {
+            var output = new List<int>();
+            foreach(char item in input)
+            {
+                output.Add(item);
+            }
+            return output;
+        }
+
+        static List<int> TransformList(List<int> input)
+        {
+            var myList = new List<int>();
+            input.AddRange(new List<int> { 17, 31, 73, 47, 23 });
+
+            for (int i = 0; i < 256; ++i)
             {
                 myList.Add(i);
             }
 
-            var newList = myList;
-            Console.WriteLine($"position {skipSize} - {string.Join(",", newList)}");
+            var skipSize = 0;
+            var currentIndex = 0;
 
-            foreach(var item in input)
+            var newList = new List<int>(myList);
+
+            for(int j = 0;j < 64;++j)
             {
-                newList = TieKnot(newList, currentIndex, item);
-                currentIndex = (currentIndex + item + skipSize) % newList.Count;
-                skipSize++;
-
-                Console.WriteLine($"position {skipSize} - {string.Join(",", newList)}");
+                foreach (var item in input)
+                {
+                    newList = TieKnot(newList, currentIndex, item);
+                    currentIndex = (currentIndex + item + skipSize) % newList.Count;
+                    skipSize++;
+                }
             }
 
-            Console.ReadKey();
+            return newList;
         }
 
         static List<int> TieKnot(List<int> list, int currentPosition, int length)
