@@ -9,7 +9,6 @@ namespace Day12_DigitalPlumber
     class MyPrograms
     {
         private static Dictionary<int, List<int>> data;
-        private static Dictionary<int, bool> alreadyVisited;
 
         public List<MyPrograms> ConnectedTo = new List<MyPrograms>();
 
@@ -20,11 +19,10 @@ namespace Day12_DigitalPlumber
 
         public static List<int> ProgramsAbleToCommunicateTo(int id)
         {
-            alreadyVisited = new Dictionary<int, bool>();
             var items = new List<int>();
             foreach (var myProg in data)
             {
-                if(CanProgramSeeId(myProg.Key, id))
+                if(CanProgramSeeId(myProg.Key, id, new List<int> (myProg.Key)))
                 {
                     items.Add(myProg.Key);
                 }
@@ -32,7 +30,7 @@ namespace Day12_DigitalPlumber
             return items;
         }
 
-        private static bool CanProgramSeeId(int prog, int id)
+        private static bool CanProgramSeeId(int prog, int id, List<int> alreadyVisited)
         {
             if (prog == id)
             {
@@ -42,22 +40,18 @@ namespace Day12_DigitalPlumber
             {
                 foreach(var p in data[prog])
                 {
-                    if(alreadyVisited.ContainsKey(p))
+                    if(alreadyVisited.Contains(p))
                     {
-                        return alreadyVisited[p];
+                        continue;
                     }
 
-                    if(p == prog)
+                    var visited = new List<int>(alreadyVisited) {p};
+                    if (CanProgramSeeId(p, id, visited))
                     {
-                        alreadyVisited[prog] = false;
-                        return false;
+                        return true;
                     }
-
-                    var val = CanProgramSeeId(p, id);
-                    alreadyVisited[p] = val;
-                    return val;
                 }
-                alreadyVisited[prog] = false;
+
                 return false;
             }
         }

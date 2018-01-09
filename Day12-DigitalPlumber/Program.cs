@@ -15,12 +15,23 @@ namespace Day12_DigitalPlumber
 
             MyPrograms.SetData(data);
 
-            var frank = MyPrograms.ProgramsAbleToCommunicateTo(0);
-            Console.WriteLine($"the following programs can see 0, {string.Join(",", frank)}");
+            var foundVersions = new List<int>();
+            var groups = new List<List<int>>();
+
+            foreach (var prog in data)
+            {
+                Console.WriteLine($"{prog.Key}");
+                if (!foundVersions.Contains(prog.Key))
+                {
+                    var frank = MyPrograms.ProgramsAbleToCommunicateTo(prog.Key);
+                    groups.Add(frank);
+                    foundVersions.AddRange(frank);
+                }
+            }
+            Console.WriteLine($"There are {groups.Count} number of groups");
+            //Console.WriteLine($"the following programs can see 0, {string.Join(",", frank)} there are {frank.Count} items");
             Console.ReadKey();
         }
-
-        
 
         private static Dictionary<int, List<int>> LoadData(string path)
         {
