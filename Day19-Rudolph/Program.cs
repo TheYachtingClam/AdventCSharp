@@ -8,20 +8,40 @@ using System.Reflection;
 
 namespace Day19_Rudolph
 {
+    using System.Runtime.CompilerServices;
+
     class Program
     {
         static void Main(string[] args)
         {
-            var rData = LoadData("test.txt");
+            var rData = LoadData("input.txt");
 
             var newMolecules = Replace(rData.originalString, rData.replacements);
-
-            foreach(var bob in newMolecules)
+            var str = rData.originalString;
+            var steps = 0;
+            while (str != "e")
             {
-                Console.WriteLine($"{bob}");
+                str = ReplaceLargestString(str, rData.replacements);
+                steps++;
             }
-            Console.WriteLine($"Count is {newMolecules.Count}");
+
+            Console.WriteLine($"Count is {steps}");
             Console.ReadKey();
+        }
+
+        private static string ReplaceLargestString(string str, List<Tuple<string, string>> rDataReplacements)
+        {
+            var sortedList = rDataReplacements.OrderByDescending(i => i.Item2.Length).ToList();
+            foreach (var repl in sortedList)
+            {
+                if (str.Contains(repl.Item2))
+                {
+                    var index = str.IndexOf(repl.Item2);
+                    str = str.Remove(index, repl.Item2.Length);
+                    return str.Insert(index, repl.Item1);
+                }
+            }
+            throw new Exception("Aargh, couldn't replace anything.");
         }
 
         private static List<string> Replace(string originalString, List<Tuple<string, string>> replacements)
