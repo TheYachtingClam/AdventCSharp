@@ -52,24 +52,11 @@ namespace Day22_WizardSim
             }
         }
         
-        public Character (int hitPoints, int armor, int damage)
-        {
-            HitPoints = hitPoints;
-            Armor = armor;
-            Damage = damage;
-        }
-
         public Character Clone()
         {
-            return new Character(HitPoints, armor, damage);
+            return new Character { HitPoints = HitPoints, Mana = Mana, Damage = Damage };
         }
 
-        public int Cost
-        {
-            get
-            {
-                return equipment.Sum(eq => eq.Cost);
-            }
-        }
+        public List<Effect> ActiveEffects = new List<Effect>();
     }
 }

@@ -12,16 +12,6 @@ namespace Day22_WizardSim
 
         public int ManaCost { get; set; }
 
-        public int Damage { get; set; }
-
-        public int Armor { get; set; }
-
-        public int Heal { get; set; }
-
-        public int DOT { get; set; }
-
-        public int Time { get; set; }
-
-        public int Mana { get; set; }
+        public Action<Character, Character> DoSomething;
     }
 }
